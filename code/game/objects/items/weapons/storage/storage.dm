@@ -533,3 +533,11 @@
 	for(var/atom/A in contents)
 		A.ex_act(severity, target)
 		CHECK_TICK
+
+/obj/item/weapon/storage/AltClick()
+	..()
+	var/mob/M = usr
+	if(Adjacent(M))
+		orient2hud(M)
+		M.s_active ? M.s_active.close(M) : show_to(M)
+		add_fingerprint(usr)
