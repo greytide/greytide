@@ -323,8 +323,10 @@
 	for(var/client/C in show_to)
 		C.images -= I
 
-/proc/flick_overlay(image/I, list/show_to, duration)
+/proc/flick_overlay(image/I, list/show_to, duration, type) // greytide: allow us to filter this
 	for(var/client/C in show_to)
+		if(!(C.prefs.toggles & ITEM_ATTACK_ANIMATION) && (type == ITEM_ATTACK_ANIMATION))
+			continue
 		C.images += I
 	addtimer(CALLBACK(GLOBAL_PROC, /.proc/remove_images_from_clients, I, show_to), duration)
 
