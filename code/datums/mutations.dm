@@ -257,7 +257,7 @@
 		else
 			new_mob = owner.randmuti()
 	else
-		new_mob = owner.randmutg()
+		new_mob = owner.randmutvg()
 	if(new_mob && ismob(new_mob))
 		owner = new_mob
 	. = owner
@@ -536,9 +536,9 @@
 	if(message)
 		message = replacetext(message,"w","v")
 		message = replacetext(message,"j","y")
-		message = replacetext(message,"a",pick("å","ä","æ","a"))
+		message = replacetext(message,"a",pick("ï¿½","ï¿½","ï¿½","a"))
 		message = replacetext(message,"bo","bjo")
-		message = replacetext(message,"o",pick("ö","ø","o"))
+		message = replacetext(message,"o",pick("ï¿½","ï¿½","o"))
 		if(prob(30))
 			message += " Bork[pick("",", bork",", bork, bork")]!"
 	return message
