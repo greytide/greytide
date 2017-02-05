@@ -80,7 +80,7 @@
 		if(D.IsSpreadByTouch())
 			ContractDisease(D)
 
-	if(lying && surgeries.len)
+	if(lying || user == src && surgeries.len)
 		if(user.a_intent == INTENT_HELP)
 			for(var/datum/surgery/S in surgeries)
 				if(S.next_step(user))
