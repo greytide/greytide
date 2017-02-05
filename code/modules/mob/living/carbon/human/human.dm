@@ -31,12 +31,12 @@
 	//initialise organs
 	create_internal_organs()
 
-	// teeth
+	//initialise teeth
 	var/obj/item/bodypart/head/U = locate() in bodyparts
 	if(istype(U))
-		U.teeth_list.Cut()
+		U.teeth_list.Cut() //Clear out their mouth of teeth
 		var/obj/item/stack/teeth/T = new dna.species.teeth_type(U)
-		U.max_teeth = T.max_amount
+		U.max_teeth = T.max_amount //Set max teeth for the head based on teeth spawntype
 		T.amount = T.max_amount
 		U.teeth_list += T
 
@@ -59,9 +59,9 @@
 			internal_organs += new /obj/item/organ/lungs()
 	if(!(NOBLOOD in dna.species.species_traits))
 		internal_organs += new /obj/item/organ/heart
-
 	internal_organs += new dna.species.mutanteyes()
 	internal_organs += new /obj/item/organ/brain
+	internal_organs += new /obj/item/organ/internal/butt
 	..()
 
 /mob/living/carbon/human/OpenCraftingMenu()
@@ -790,7 +790,7 @@
 		return
 	else
 		if(hud_used.healths)
-			var/health_amount = health - staminaloss
+			var/health_amount = health
 			if(..(health_amount)) //not dead
 				switch(hal_screwyhud)
 					if(1)
@@ -826,6 +826,25 @@
 					hud_used.healthdoll.add_overlay(image('icons/mob/screen_gen.dmi',"[t]6"))
 			else
 				hud_used.healthdoll.icon_state = "healthdoll_DEAD"
+		if(hud_used.staminas)
+			if(stat == DEAD)
+				hud_used.staminas.icon_state = "stamina6"
+			else if(stunned || weakened)
+				hud_used.staminas.icon_state = "stamina6"
+			else
+				switch(hal_screwyhud)
+					if(1 to 2)	hud_used.staminas.icon_state = "stamina6"
+					if(5)	hud_used.staminas.icon_state = "stamina0"
+					else
+						switch(health - staminaloss)
+							if(100 to INFINITY)     hud_used.staminas.icon_state = "stamina0"
+							if(80 to 100)           hud_used.staminas.icon_state = "stamina1"
+							if(60 to 80)            hud_used.staminas.icon_state = "stamina2"
+							if(40 to 60)            hud_used.staminas.icon_state = "stamina3"
+							if(20 to 40)            hud_used.staminas.icon_state = "stamina4"
+							if(0 to 20)             hud_used.staminas.icon_state = "stamina5"
+							else                    hud_used.staminas.icon_state = "stamina6"
+
 
 /mob/living/carbon/human/fully_heal(admin_revive = 0)
 	if(admin_revive)

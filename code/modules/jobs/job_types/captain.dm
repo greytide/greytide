@@ -80,8 +80,6 @@ Head of Personnel
 			            access_theatre, access_chapel_office, access_library, access_research, access_mining, access_heads_vault, access_mining_station,
 			            access_hop, access_RC_announce, access_keycard_auth, access_gateway, access_mineral_storeroom)
 
-	implants = list(/obj/item/weapon/implant/mindshield)
-
 /datum/outfit/job/hop
 	name = "Head of Personnel"
 	jobtype = /datum/job/hop
@@ -94,3 +92,4 @@ Head of Personnel
 	head = /obj/item/clothing/head/hopcap
 	backpack_contents = list(/obj/item/weapon/storage/box/ids=1,\
 		/obj/item/weapon/melee/classic_baton/telescopic=1, /obj/item/device/modular_computer/tablet/preset/advanced = 1)
+	implants = list(/obj/item/weapon/implant/mindshield)

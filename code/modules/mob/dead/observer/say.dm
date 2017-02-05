@@ -4,6 +4,9 @@
 	if (!message)
 		return
 
+	if(message == "*scream" || message == "*fart")
+		return // no farting yo
+
 	log_say("Ghost/[src.key] : [message]")
 
 	. = src.say_dead(message)

@@ -94,9 +94,15 @@
 	results = list("rotatium" = 3)
 	required_reagents = list("mindbreaker" = 1, "teslium" = 1, "neurotoxin2" = 1)
 	mix_message = "<span class='danger'>After sparks, fire, and the smell of mindbreaker, the mix is constantly spinning with no stop in sight.</span>"
-	
+
 /datum/chemical_reaction/anacea
 	name = "Anacea"
 	id = "anacea"
 	results = list("anacea" = 3)
 	required_reagents = list("haloperidol" = 1, "impedrezene" = 1, "radium" = 1)
+
+/datum/chemical_reaction/bleach
+	name = "bleach"
+	id = "bleach"
+	results = list("bleach" = 3)
+	required_reagents = list("cleaner" = 1, "sodium" = 1, "chlorine" = 1)

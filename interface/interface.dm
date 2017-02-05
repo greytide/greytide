@@ -58,7 +58,7 @@
 			if(line)
 				if(first)
 					first = FALSE
-					message += ". The following experimental changes are active and are probably the cause of any new or sudden issues you may experience. If possible, please try to find a specific thread for your issue instead of posting to the general issue tracker:"	
+					message += ". The following experimental changes are active and are probably the cause of any new or sudden issues you may experience. If possible, please try to find a specific thread for your issue instead of posting to the general issue tracker:"
 				message += " <a href='[config.githuburl]/pull/[line]'>#[line]</a>"
 		if(tgalert(src, message, "Report Issue","Yes","No")=="No")
 			return
@@ -138,15 +138,11 @@ Hotkey-Mode: (hotkey-mode must be on)
 \t3 = grab-intent
 \t4 = harm-intent
 \tNumpad = Body target selection (Press 8 repeatedly for Head->Eyes->Mouth)
-\tAlt(HOLD) = Alter movement intent 
+\tAlt(HOLD) = Alter movement intent
 </font>"}
 
 	var/other = {"<font color='purple'>
 Any-Mode: (hotkey doesn't need to be on)
-\tCtrl+a = left
-\tCtrl+s = down
-\tCtrl+d = right
-\tCtrl+w = up
 \tCtrl+q = drop
 \tCtrl+e = equip
 \tCtrl+r = throw
@@ -155,8 +151,8 @@ Any-Mode: (hotkey doesn't need to be on)
 \tCtrl+o = OOC
 \tCtrl+x = swap-hand
 \tCtrl+z = activate held object (or Ctrl+y)
-\tCtrl+f = cycle-intents-left
-\tCtrl+g = cycle-intents-right
+\tCtrl+f = fart
+\tCtrl+g = scream
 \tCtrl+1 = help-intent
 \tCtrl+2 = disarm-intent
 \tCtrl+3 = grab-intent
@@ -202,18 +198,14 @@ Hotkey-Mode: (hotkey-mode must be on)
 
 	var/other = {"<font color='purple'>
 Any-Mode: (hotkey doesn't need to be on)
-\tCtrl+a = left
-\tCtrl+s = down
-\tCtrl+d = right
-\tCtrl+w = up
 \tCtrl+q = unequip active module
 \tCtrl+x = cycle active modules
 \tCtrl+b = resist
 \tCtrl+h = talk-wheel
 \tCtrl+o = OOC
 \tCtrl+z = activate held object (or Ctrl+y)
-\tCtrl+f = cycle-intents-left
-\tCtrl+g = cycle-intents-right
+\tCtrl+f = fart
+\tCtrl+g = scream
 \tCtrl+1 = activate module 1
 \tCtrl+2 = activate module 2
 \tCtrl+3 = activate module 3

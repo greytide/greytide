@@ -723,21 +723,32 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		s.set_up(reagents, 1, loc, silent=TRUE)
 		s.start()
 		vapetime = 0
+		if(prob(0.5))
+			playsound(get_turf(src), 'sound/effects/pop_expl.ogg', 50, 0)
+			M.apply_damage(15, BURN, "head")
+			M.doUnEquip(src, 1)
+			M.Weaken(15, 1, 0)
+			var/datum/effect_system/spark_spread/sp = new /datum/effect_system/spark_spread
+			sp.set_up(5, 1, src)
+			sp.start()
+			M << "<span class='userdanger'>The [name] suddenly explodes in your mouth!</span>"
+			qdel(src)
 
 	if(emagged && vapetime > 3)
 		var/datum/effect_system/smoke_spread/chem/s = new
 		s.set_up(reagents, 4, loc, silent=TRUE)
 		s.start()
 		vapetime = 0
-		if(prob(5))//small chance for the vape to break and deal damage if it's emagged
+		if(prob(2))//small chance for the vape to break and deal damage if it's emagged
 			playsound(get_turf(src), 'sound/effects/pop_expl.ogg', 50, 0)
 			M.apply_damage(20, BURN, "head")
+			M.doUnEquip(src, 1)
 			M.Weaken(15, 1, 0)
-			qdel(src)
 			var/datum/effect_system/spark_spread/sp = new /datum/effect_system/spark_spread
 			sp.set_up(5, 1, src)
 			sp.start()
 			M << "<span class='userdanger'>The [name] suddenly explodes in your mouth!</span>"
+			qdel(src)
 
 	if(reagents && reagents.total_volume)
 		hand_reagents()
