@@ -5,23 +5,6 @@
 		message_admins("[usr.key] has attempted to override the admin panel!")
 		log_admin("[key_name(usr)] tried to use the admin panel without authorization.")
 		return
-	if(href_list["rejectadminhelp"])
-		if(!check_rights(R_ADMIN))
-			return
-		var/client/C = locate(href_list["rejectadminhelp"])
-		if(!C)
-			return
-		if (deltimer(C.adminhelptimerid))
-			C.giveadminhelpverb()
-
-		C << 'sound/effects/adminhelp.ogg'
-
-		C << "<font color='red' size='4'><b>- AdminHelp Rejected! -</b></font>"
-		C << "<font color='red'><b>Your admin help was rejected.</b> The adminhelp verb has been returned to you so that you may try again.</font>"
-		C << "Please try to be calm, clear, and descriptive in admin helps, do not assume the admin has seen any related events, and clearly state the names of anybody you are reporting."
-
-		message_admins("[key_name_admin(usr)] Rejected [C.key]'s admin help. [C.key]'s Adminhelp verb has been returned to them.")
-		log_admin("[key_name(usr)] Rejected [C.key]'s admin help.")
 
 	else if(href_list["stickyban"])
 		stickyban(href_list["stickyban"],href_list)
@@ -1520,6 +1503,14 @@
 	else if(href_list["adminplayeropts"])
 		var/mob/M = locate(href_list["adminplayeropts"])
 		show_player_panel(M)
+
+	else if(href_list["adminticketview"])
+		for(var/i = tickets_list.len, i >= 1, i--)
+			var/datum/admin_ticket/T = tickets_list[i]
+			if(T.ticket_id == text2num(href_list["adminticketview"]))
+				T.view_log()
+			return
+		usr << "<span class='adminnotice'>There is no ticket with the ID of [href_list["adminticketview"]]!</span>"
 
 	else if(href_list["adminplayerobservefollow"])
 		if(!isobserver(usr) && !check_rights(R_ADMIN))

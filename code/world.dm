@@ -1,3 +1,5 @@
+/var/round_number = 0
+
 /world
 	mob = /mob/new_player
 	turf = /turf/open/space
@@ -6,7 +8,7 @@
 	cache_lifespan = 7
 	hub = "Exadv1.spacestation13"
 	hub_password = "kMZy3U5jJHSiBQjr"
-	name = "/tg/ Station 13"
+	name = "((greytide)) station 13"
 	fps = 20
 	visibility = 0
 
@@ -33,6 +35,15 @@ var/list/map_transition_config = MAP_TRANSITION_CONFIG
 	diary << "\n\nStarting up. [time2text(world.timeofday, "hh:mm.ss")]\n---------------------"
 	diaryofmeanpeople << "\n\nStarting up. [time2text(world.timeofday, "hh:mm.ss")]\n---------------------"
 	changelog_hash = md5('html/changelog.html')					//used for telling if the changelog has changed recently
+
+	var/roundfile = file("data/roundcount.txt")
+	round_number = text2num(file2text(roundfile))
+	if(round_number == null || round_number == "" || round_number == 0)
+		round_number = 1
+	else
+		round_number++
+	fdel(roundfile)
+	text2file(num2text(round_number), roundfile)
 
 	make_datum_references_lists()	//initialises global lists for referencing frequently used datums (so that we only ever do it once)
 	load_configuration()
@@ -139,48 +150,6 @@ var/last_irc_status = 0
 			// Shuttle timer, in seconds
 
 		return list2params(s)
-
-	else if("announce" in input)
-		if(!key_valid)
-			return "Bad Key"
-		else
-#define CHAT_PULLR	64 //defined in preferences.dm, but not available here at compilation time
-			for(var/client/C in clients)
-				if(C.prefs && (C.prefs.chat_toggles & CHAT_PULLR))
-					C << "<span class='announce'>PR: [input["announce"]]</span>"
-#undef CHAT_PULLR
-
-	else if("crossmessage" in input)
-		if(!key_valid)
-			return
-		else
-			if(input["crossmessage"] == "Ahelp")
-				relay_msg_admins("<span class='adminnotice'><b><font color=red>HELP: </font> [input["source"]] [input["message_sender"]]: [input["message"]]</b></span>")
-			if(input["crossmessage"] == "Comms_Console")
-				minor_announce(input["message"], "Incoming message from [input["message_sender"]]")
-				for(var/obj/machinery/computer/communications/CM in machines)
-					CM.overrideCooldown()
-			if(input["crossmessage"] == "News_Report")
-				minor_announce(input["message"], "Breaking Update From [input["message_sender"]]")
-
-	else if("adminmsg" in input)
-		if(!key_valid)
-			return "Bad Key"
-		else
-			return IrcPm(input["adminmsg"],input["msg"],input["sender"])
-
-	else if("namecheck" in input)
-		if(!key_valid)
-			return "Bad Key"
-		else
-			log_admin("IRC Name Check: [input["sender"]] on [input["namecheck"]]")
-			message_admins("IRC name checking on [input["namecheck"]] from [input["sender"]]")
-			return keywords_lookup(input["namecheck"],1)
-	else if("adminwho" in input)
-		if(!key_valid)
-			return "Bad Key"
-		else
-			return ircadminwho()
 
 
 /world/Reboot(var/reason, var/feedback_c, var/feedback_r, var/time)

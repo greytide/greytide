@@ -57,6 +57,8 @@ var/list/admin_ranks = list()								//list of all admin_rank datums
 			flag = R_SOUNDS
 		if("spawn","create")
 			flag = R_SPAWN
+		if("ticket")
+			flag = R_TICKET
 		if("@","prev")
 			flag = previous_rights
 	return flag

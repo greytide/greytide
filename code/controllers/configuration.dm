@@ -56,6 +56,7 @@
 	var/fps = 20
 	var/allow_holidays = 0				//toggles whether holiday-specific content should be used
 	var/tick_limit_mc_init = TICK_LIMIT_MC_INIT_DEFAULT	//SSinitialization throttling
+	var/admin_who_blocked = 0
 
 	var/hostedby = null
 	var/respawn = 1
@@ -329,6 +330,8 @@
 					config.log_pda = 1
 				if("log_hrefs")
 					config.log_hrefs = 1
+				if("admin_who_blocked")
+					admin_who_blocked = 1
 				if("log_twitter")
 					config.log_twitter = 1
 				if("log_world_topic")

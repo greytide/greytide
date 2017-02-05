@@ -8,7 +8,7 @@ var/datum/subsystem/ticker/ticker
 
 	priority = 200
 	flags = SS_FIRE_IN_LOBBY|SS_KEEP_TIMING
-
+	var/restart_timeout = 250
 	var/current_state = GAME_STATE_STARTUP	//state of current round (used by process()) Use the defines GAME_STATE_* !
 	var/force_ending = 0					//Round was ended by admin intervention
 	// If true, there is no lobby phase, the game starts immediately.
@@ -49,6 +49,10 @@ var/datum/subsystem/ticker/ticker
 
 	var/obj/screen/cinematic = null			//used for station explosion cinematic
 
+	var/next_alert_time = 0
+	var/next_check_admin = 1
+
+	var/total_deaths = 0
 	var/maprotatechecked = 0
 
 	var/news_report
@@ -108,19 +112,37 @@ var/datum/subsystem/ticker/ticker
 			mode.process(wait * 0.1)
 			check_queue()
 			check_maprotate()
+
+			if(world.time > next_alert_time && next_check_admin)
+				next_alert_time = world.time+1800
+				var/admins_online = total_admins_active()
+				if(!admins_online)
+					next_check_admin = 0
+
 			scripture_states = scripture_unlock_alert(scripture_states)
 
 			if(!mode.explosion_in_progress && mode.check_finished() || force_ending)
 				current_state = GAME_STATE_FINISHED
+				ticket_counter_visible_to_everyone = 1
 				toggle_ooc(1) // Turn it on
 				declare_completion(force_ending)
 				addtimer(CALLBACK(src, .proc/NukeCleanup), 50)
 
 /datum/subsystem/ticker/proc/NukeCleanup()
-	if(mode.station_was_nuked)
-		world.Reboot("Station destroyed by Nuclear Device.", "end_proper", "nuke")
+
+	var/admins_online = total_admins_active()
+	var/unresolved_tickets = total_unresolved_tickets()
+
+	if(unresolved_tickets && admins_online)
+		ticker.delay_end = 1
+		message_admins("Not all tickets have been resolved. Server restart delayed.")
+	else if(unresolved_tickets && !admins_online)
+		world.Reboot("Round ended, but there were still active tickets. Please submit a player complaint if you did not receive a response.", "end_proper", "ended with open tickets")
 	else
-		world.Reboot("Round ended.", "end_proper", "proper completion")
+		if(mode.station_was_nuked)
+			world.Reboot("Station destroyed by Nuclear Device.", "end_proper", "nuke")
+		else
+			world.Reboot("Round ended.", "end_proper", "proper completion")
 
 /datum/subsystem/ticker/proc/setup()
 		//Create and announce mode

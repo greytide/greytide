@@ -208,6 +208,8 @@
 		. += "[seperator]+SOUND"
 	if(rights & R_SPAWN)
 		. += "[seperator]+SPAWN"
+	if(rights & R_TICKET)
+		. += "[seperator]+TICKET"		
 
 	for(var/verbpath in adds)
 		. += "[seperator]+[verbpath]"
@@ -547,3 +549,60 @@ for(var/t in test_times)
 	if(!istype(the_matrix) || the_matrix.len != 20)
 		return "#ffffffff"
 	return rgb(the_matrix[1]*255, the_matrix[6]*255, the_matrix[11]*255, the_matrix[16]*255)
+
+/proc/key_name_params(var/whom, var/include_link = null, var/include_name = 1, var/anchor_params = null, var/datum/admin_ticket/T = null)
+	var/mob/M
+	var/client/C
+	var/key
+	var/ckey
+
+	if(!whom)	return "*null*"
+	if(istype(whom, /client))
+		C = whom
+		M = C.mob
+		key = C.key
+		ckey = C.ckey
+	else if(ismob(whom))
+		M = whom
+		C = M.client
+		key = M.key
+		ckey = M.ckey
+	else if(istext(whom))
+		key = whom
+		ckey = ckey(whom)
+		C = directory[ckey]
+		if(C)
+			M = C.mob
+	else
+		return "*invalid*"
+
+	. = ""
+
+	if(!ckey)
+		include_link = 0
+
+	if(key)
+		if(include_link)
+			. += "<a href='?priv_msg=[T ? "ticket;ticket=\ref[T]" : ckey][anchor_params ? ";[anchor_params]" : ""]'>"
+		if(isnum(C.ip_intel) && isnum(config.ipintel_rating_bad) && C.ip_intel >= config.ipintel_rating_bad)
+			. += " (ipintel=[C.ip_intel*100]%)"
+		
+		if(C && C.holder && C.holder.fakekey && !include_name)
+			. += "Administrator"
+		else
+			. += key
+		if(!C)
+			. += "\[DC\]"
+
+		if(include_link)
+			. += "</a>"
+	else
+		. += "*no key*"
+
+	if(include_name && M)
+		if(M.real_name)
+			. += "/([M.real_name])"
+		else if(M.name)
+			. += "/([M.name])"
+
+	return .	

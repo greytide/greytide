@@ -14,7 +14,7 @@
 
 // BEGIN_INCLUDE
 #include "_maps\__MAP_DEFINES.dm"
-#include "_maps\tgstation2.dm"
+#include "_maps\runtimestation.dm"
 #include "code\_compile_options.dm"
 #include "code\world.dm"
 #include "code\__DATASTRUCTURES\heap.dm"
@@ -932,6 +932,7 @@
 #include "code\js\byjax.dm"
 #include "code\js\menus.dm"
 #include "code\modules\admin\admin.dm"
+#include "code\modules\admin\admin_helper.dm"
 #include "code\modules\admin\admin_investigate.dm"
 #include "code\modules\admin\admin_ranks.dm"
 #include "code\modules\admin\admin_verbs.dm"
@@ -953,6 +954,11 @@
 #include "code\modules\admin\whitelist.dm"
 #include "code\modules\admin\DB_ban\functions.dm"
 #include "code\modules\admin\permissionverbs\permissionedit.dm"
+#include "code\modules\admin\tickets\admin_ticket.dm"
+#include "code\modules\admin\tickets\admin_ticket_procs.dm"
+#include "code\modules\admin\tickets\admin_ticket_templates.dm"
+#include "code\modules\admin\tickets\admin_ticket_topic.dm"
+#include "code\modules\admin\tickets\admin_ticket_verbs.dm"
 #include "code\modules\admin\verbs\adminhelp.dm"
 #include "code\modules\admin\verbs\adminjump.dm"
 #include "code\modules\admin\verbs\adminpm.dm"
