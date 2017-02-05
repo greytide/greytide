@@ -45,6 +45,9 @@
 				/obj/item/weapon/reagent_containers/food/snacks/grown/tea/astra = list("teapowder" = 0, "salglu_solution" = 0),
 				/obj/item/weapon/reagent_containers/food/snacks/grown/tea = list("teapowder" = 0),
 
+				// Good memes
+				/obj/item/weapon/storage/book/bible = list("holywater" = 25),
+				/obj/item/weapon/screwdriver = list("screwdrivercocktail" = 30),
 
 				//All types that you can put into the grinder to transfer the reagents to the beaker. !Put all recipes above this.!
 				/obj/item/slime_extract = list(),

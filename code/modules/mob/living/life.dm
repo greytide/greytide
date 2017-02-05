@@ -7,6 +7,7 @@
 
 	if (notransform)
 		return
+
 	if(!loc)
 		if(client)
 			for(var/obj/effect/landmark/error/E in landmarks_list)

@@ -31,6 +31,11 @@
 	var/lip_style = null
 	var/lip_color = "white"
 
+	var/list/teeth_list = list()
+	var/max_teeth = 32
+	var/max_dentals = 1
+	var/list/dentals = list()
+
 /obj/item/bodypart/head/drop_organs(mob/user)
 	var/turf/T = get_turf(src)
 	if(status != BODYPART_ROBOTIC)
@@ -195,3 +200,35 @@
 	dismemberable = 0
 	max_damage = 50
 	animal_origin = LARVA_BODYPART
+
+/obj/item/bodypart/head/proc/knock_out_teeth(throw_dir, num=32)
+	num = Clamp(num, 1, 32)
+	var/done = 0
+	if(teeth_list && teeth_list.len)
+		var/stacks = rand(1,3)
+		for(var/curr = 1 to stacks)
+			var/obj/item/stack/teeth/teeth = pick(teeth_list)
+			if(!teeth || teeth.zero_amount()) return
+			var/drop = round(min(teeth.amount, num)/stacks)
+			var/obj/item/stack/teeth/T = new teeth.type(owner.loc, drop)
+			T.copy_evidences(teeth)
+			teeth.use(drop)
+			T.add_blood(owner)
+			var/turf/target = get_turf(owner.loc)
+			var/range = rand(2,T.throw_range)
+			for(var/i = 1; i < range; i++)
+				var/turf/new_turf = get_step(target, throw_dir)
+				target = new_turf
+				if(new_turf.density)
+					break
+			T.throw_at(target,T.throw_range,T.throw_speed)
+			teeth.zero_amount()
+			done = 1
+	return done
+
+/obj/item/bodypart/head/proc/get_teeth()
+	var/amt = 0
+	if(!teeth_list) teeth_list = list()
+	for(var/obj/item/stack/teeth in teeth_list)
+		amt += teeth.amount
+	return amt

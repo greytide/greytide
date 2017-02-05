@@ -210,6 +210,16 @@
 
 /mob/living/carbon/human/set_species(datum/species/mrace, icon_update = 1)
 	..()
+
+	var/obj/item/bodypart/head/U = locate() in bodyparts // There sure could be a better way to do this.
+	if(istype(U))
+		U.teeth_list.Cut()
+		var/obj/item/stack/teeth/T = new dna.species.teeth_type
+		T.loc = U
+		U.max_teeth = T.max_amount
+		T.amount = T.max_amount
+		U.teeth_list += T
+
 	if(icon_update)
 		update_body()
 		update_hair()

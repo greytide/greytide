@@ -343,6 +343,14 @@
 	build_path = /obj/item/weapon/scalpel
 	category = list("initial", "Medical")
 
+/datum/design/replacement_teeth
+	name = "Replacement teeth"
+	id = "replacement_teeth"
+	build_type = AUTOLATHE
+	materials = list(MAT_METAL = 250)
+	build_path = /obj/item/stack/teeth/replacement
+	category = list("initial", "Medical")
+
 /datum/design/circular_saw
 	name = "Circular saw"
 	id = "circular_saw"

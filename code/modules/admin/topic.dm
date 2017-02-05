@@ -822,6 +822,15 @@
 			dat += "<td width='20%'><a href='?src=\ref[src];jobban3=borer;jobban4=\ref[M]'>Borer</a></td>"
 
 		dat += "</tr></table>"
+
+		// Cat banning and more
+		dat += "<table cellpadding='1' cellspacing='0' width='100%'>"
+		dat += "<tr bgcolor='ffeeaa'><th colspan='10'>Misc</th></tr><tr align='center'>"
+		if(jobban_isbanned(M, "catban"))
+			dat += "<td width='20%'><a href='?src=\ref[src];jobban3=catban;jobban4=\ref[M]'><font color=red>Catban</font></a></td>"
+		else
+			dat += "<td width='20%'><a href='?src=\ref[src];jobban3=catban;jobban4=\ref[M]'>Catban</a></td>"
+		dat += "</tr></table>"
 		usr << browse(dat, "window=jobban2;size=800x450")
 		return
 

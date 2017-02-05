@@ -45,6 +45,7 @@
 	var/siemens_coeff = 1 //base electrocution coefficient
 	var/damage_overlay_type = "human" //what kind of damage overlays (if any) appear on our species when wounded?
 	var/fixed_mut_color = "" //to use MUTCOLOR with a fixed color that's independent of dna.feature["mcolor"]
+	var/teeth_type = /obj/item/stack/teeth/generic
 
 	// species flags. these can be found in flags.dm
 	var/list/species_traits = list()

@@ -451,7 +451,9 @@ var/list/preferences_datums = list()
 
 
 			for (var/i in special_roles)
-				if(jobban_isbanned(user, i))
+				if(jobban_isbanned(user, "catban"))
+					dat += "<b>Be [capitalize(i)]:</b> <a href='?_src_=prefs;jobbancheck=[i]'>CAT-BANNED</a><br>"
+				else if(jobban_isbanned(user, i))
 					dat += "<b>Be [capitalize(i)]:</b> <a href='?_src_=prefs;jobbancheck=[i]'>BANNED</a><br>"
 				else
 					var/days_remaining = null
@@ -524,6 +526,9 @@ var/list/preferences_datums = list()
 			HTML += "<tr bgcolor='[job.selection_color]'><td width='60%' align='right'>"
 			var/rank = job.title
 			lastJob = job
+			if(jobban_isbanned(user, "catban") && rank != "Assistant")
+				HTML += "<font color=red>[rank]</font></td><td><font color=red><b> \[CAT-BANNED\]</b></font></td></tr>"
+				continue
 			if(jobban_isbanned(user, rank))
 				HTML += "<font color=red>[rank]</font></td><td><a href='?_src_=prefs;jobbancheck=[rank]'> BANNED</a></td></tr>"
 				continue
@@ -577,7 +582,9 @@ var/list/preferences_datums = list()
 			HTML += "<a class='white' href='?_src_=prefs;preference=job;task=setJobLevel;level=[prefUpperLevel];text=[rank]' oncontextmenu='javascript:return setJobPrefRedirect([prefLowerLevel], \"[rank]\");'>"
 
 			if(rank == "Assistant")//Assistant is special
-				if(job_civilian_low & ASSISTANT)
+				if(jobban_isbanned(user, "catban"))
+					HTML += "<font color=orange>Mandatory</font>"
+				else if(job_civilian_low & ASSISTANT)
 					HTML += "<font color=green>Yes</font>"
 				else
 					HTML += "<font color=red>No</font>"

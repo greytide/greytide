@@ -296,6 +296,9 @@
 		src << alert("[rank] is not available. Please try another.")
 		return 0
 
+	if(jobban_isbanned("catban"))
+		rank = "Assistant"
+
 	//Remove the player from the join queue if he was in one and reset the timer
 	ticker.queued_players -= src
 	ticker.queue_delay = 4

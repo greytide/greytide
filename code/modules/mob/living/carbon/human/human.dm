@@ -31,6 +31,18 @@
 	//initialise organs
 	create_internal_organs()
 
+	// teeth
+	var/obj/item/bodypart/head/U = locate() in bodyparts
+	if(istype(U))
+		U.teeth_list.Cut()
+		var/obj/item/stack/teeth/T = new dna.species.teeth_type(U)
+		U.max_teeth = T.max_amount
+		T.amount = T.max_amount
+		U.teeth_list += T
+
+	for(var/obj/item/organ/I in internal_organs)
+		I.Insert(src)
+
 	martial_art = default_martial_art
 
 	handcrafting = new()
