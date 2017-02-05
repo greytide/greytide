@@ -212,18 +212,18 @@
 	. = ..()
 	if (T.lighting_object == src)
 		T.lighting_object = null
-	
+
 /atom/movable/light/New()
 	if (!isturf(loc))
 		PutOut()
 		throw EXCEPTION("Invalid light placement: loc must be a turf")
 	var/turf/T = loc
-	
+
 	if (T.lighting_object && T.lighting_object != src)
 		PutOut()
 		throw EXCEPTION("BUG: /atom/movable/light created on a turf that already has one")
 	T.lighting_object = src
-	
+
 /atom/movable/light/proc/PutOut()
 	alpha = 0
 	qdel(src, force = TRUE)
@@ -328,15 +328,15 @@
 	if(lighting_object)
 		var/newalpha
 		if(lighting_lumcount <= 0)
-			newalpha = 255
+			newalpha = LIGHTING_DARKEST_VISIBLE_ALPHA
 		else
 			if(lighting_lumcount < LIGHTING_CAP)
-				var/num = Clamp(lighting_lumcount * LIGHTING_CAP_FRAC, 0, 255)
-				newalpha = 255-num
+				var/num = Clamp(lighting_lumcount * LIGHTING_CAP_FRAC, 0, LIGHTING_DARKEST_VISIBLE_ALPHA)
+				newalpha = LIGHTING_DARKEST_VISIBLE_ALPHA - num
 			else //if(lighting_lumcount >= LIGHTING_CAP)
 				newalpha = 0
 		if(newalpha >= LIGHTING_DARKEST_VISIBLE_ALPHA)
-			newalpha = 255
+			newalpha = LIGHTING_DARKEST_VISIBLE_ALPHA
 		if(lighting_object.alpha != newalpha)
 			if(instantly || abs(lighting_object.alpha - newalpha) < LIGHTING_MIN_ALPHA_DELTA_TO_ANIMATE)
 				lighting_object.alpha = newalpha
