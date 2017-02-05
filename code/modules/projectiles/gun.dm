@@ -190,15 +190,7 @@
 	return 1
 
 /obj/item/weapon/gun/proc/handle_pins(mob/living/user)
-	if(pin)
-		if(pin.pin_auth(user) || pin.emagged)
-			return 1
-		else
-			pin.auth_fail(user)
-			return 0
-	else
-		user << "<span class='warning'>[src]'s trigger is locked. This weapon doesn't have a firing pin installed!</span>"
-	return 0
+	return 1
 
 /obj/item/weapon/gun/proc/recharge_newshot()
 	return
