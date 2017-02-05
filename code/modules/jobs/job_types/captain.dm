@@ -80,6 +80,7 @@ Head of Personnel
 			            access_theatre, access_chapel_office, access_library, access_research, access_mining, access_heads_vault, access_mining_station,
 			            access_hop, access_RC_announce, access_keycard_auth, access_gateway, access_mineral_storeroom)
 
+	implants = list(/obj/item/weapon/implant/mindshield)
 
 /datum/outfit/job/hop
 	name = "Head of Personnel"
