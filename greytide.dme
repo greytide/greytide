@@ -1,3 +1,4 @@
+<<<<<<< HEAD:greytide.dme
 // DM Environment file for tgstation.dme.
 // All manual changes should be made outside the BEGIN_ and END_ blocks.
 // New source code should be placed in .dm files: choose File/New --> Code File.
@@ -993,6 +994,7 @@
 #include "code\modules\admin\verbs\tripAI.dm"
 #include "code\modules\admin\verbs\SDQL2\SDQL_2.dm"
 #include "code\modules\admin\verbs\SDQL2\SDQL_2_parser.dm"
+#include "code\modules\admin\verbs\SDQL2\SDQL_2_wrappers.dm"
 #include "code\modules\assembly\assembly.dm"
 #include "code\modules\assembly\bomb.dm"
 #include "code\modules\assembly\doorcontrol.dm"
