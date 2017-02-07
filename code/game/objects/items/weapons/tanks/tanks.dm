@@ -119,13 +119,10 @@
 	if (H && !QDELETED(H))
 		for(var/obj/item/W in H)
 			H.dropItemToGround(W)
+			W.add_blood(H)
 			if(prob(50))
 				step(W, pick(alldirs))
-		H.hair_style = "Bald"
-		H.update_hair()
-		H.bleed_rate = 5
-		new /obj/effect/gibspawner/generic(H.loc, H.viruses, H.dna)
-		H.adjustBruteLoss(1000) //to make the body super-bloody
+		H.gib()
 
 	return (BRUTELOSS)
 

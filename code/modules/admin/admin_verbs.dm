@@ -22,7 +22,9 @@ var/list/admin_verbs_default = list(
 	/client/proc/cmd_admin_pm_panel,		/*admin-pm list*/
 	/client/proc/view_tickets,
 	/client/proc/toggleticketlistenall,
-	/client/proc/stop_sounds
+	/client/proc/stop_sounds,
+	/client/proc/cmd_mentor_say,
+	/client/proc/mentor_memo
 	)
 var/list/admin_verbs_admin = list(
 	/client/proc/aooc,

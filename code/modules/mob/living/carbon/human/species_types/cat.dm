@@ -12,3 +12,18 @@
 	exotic_bloodtype = "L"
 	burnmod = 1.25
 	brutemod = 1.25
+
+/datum/species/tarajan/qualifies_for_rank(rank, list/features)
+	if(rank in command_positions)
+		return 0
+	if(rank in security_positions)
+		return 0
+	if(rank in science_positions)
+		return 0
+	if(rank in medical_positions)
+		return 0
+	if(rank in engineering_positions)
+		return 0
+	if(rank == "Quartermaster")
+		return 0
+	return 1

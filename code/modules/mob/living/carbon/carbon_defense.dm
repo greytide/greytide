@@ -70,6 +70,15 @@
 /mob/living/carbon/attack_drone(mob/living/simple_animal/drone/user)
 	return //so we don't call the carbon's attack_hand().
 
+/mob/living/carbon/attackby(obj/item/I, mob/user, params)
+	if(lying || user == src)
+		if(surgeries.len)
+			if(user.a_intent == "help")
+				for(var/datum/surgery/S in surgeries)
+					if(S.next_step(user, src))
+						return 1
+	..()
+
 /mob/living/carbon/attack_hand(mob/living/carbon/human/user)
 
 	for(var/datum/disease/D in viruses)
