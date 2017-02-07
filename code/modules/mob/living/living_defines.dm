@@ -75,3 +75,5 @@
 	var/list/status_effects //a list of all status effects the mob has
 
 	var/list/implants = null
+
+	var/list/alternate_screams = list()

@@ -108,22 +108,21 @@
 		on = FALSE
 		update_icon()
 		return
+
 	var/datum/gas_mixture/air1 = AIR1
-	var/turf/T = get_turf(src)
+
 	if(occupant)
 		if(occupant.health >= 100) // Don't bother with fully healed people.
 			on = FALSE
 			update_icon()
-			playsound(T, 'sound/machines/cryo_warning.ogg', volume, 1) // Bug the doctors.
-			radio.talk_into(src, "Patient fully restored", radio_channel)
-			if(autoeject) // Eject if configured.
-				radio.talk_into(src, "Auto ejecting patient now", radio_channel)
-				open_machine()
+			open_machine()
+			playsound(src.loc, 'sound/machines/ding.ogg', 50, 1)
 			return
 		else if(occupant.stat == DEAD) // We don't bother with dead people.
 			return
 			if(autoeject) // Eject if configured.
 				open_machine()
+				playsound(src.loc, 'sound/machines/ding.ogg', 50, 1)
 			return
 		if(air1.gases.len)
 
@@ -167,7 +166,11 @@
 	update_icon()
 
 /obj/machinery/atmospherics/components/unary/cryo_cell/relaymove(mob/user)
-	container_resist(user)
+	open_machine()
+
+/obj/machinery/atmospherics/components/unary/cryo_cell/container_resist()
+	open_machine()
+	return
 
 /obj/machinery/atmospherics/components/unary/cryo_cell/open_machine(drop = 0)
 	if(!state_open && !panel_open)

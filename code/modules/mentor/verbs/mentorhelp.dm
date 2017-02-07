@@ -1,6 +1,6 @@
 /client/verb/mentorhelp(msg as text)
 	set category = "Mentor"
-	set name = "Mentorhelp"
+	set name = "mentorhelp"
 
 	//remove out adminhelp verb temporarily to prevent spamming of mentors.
 	src.verbs -= /client/verb/mentorhelp

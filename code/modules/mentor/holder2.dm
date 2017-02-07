@@ -21,7 +21,9 @@ var/list/mentor_datums = list()
 		owner = null
 
 /client/proc/dementor()
+	var/mentor = mentor_datums[ckey]
 	mentor_datums -= ckey
+	qdel(mentor)
 	return 1
 
 /proc/check_mentor()
