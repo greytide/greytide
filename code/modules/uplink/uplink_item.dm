@@ -638,6 +638,7 @@ var/list/uplink_items = list() // Global list so we only initialize this once.
 	desc = "A highly experimental bioterror agent which creates dormant nodules to be etched into the grey matter of the brain. On death, these nodules take control of the dead body, causing limited revivification, along with slurred speech, aggression, and the ability to infect others with this agent."
 	item = /obj/item/weapon/storage/box/syndie_kit/romerol
 	cost = 25
+	cant_discount = TRUE
 	exclude_modes = list(/datum/game_mode/nuclear, /datum/game_mode/gang)
 
 /datum/uplink_item/stealthy_weapons/dart_pistol
@@ -1172,6 +1173,14 @@ var/list/uplink_items = list() // Global list so we only initialize this once.
 /datum/uplink_item/role_restricted
 	category = "Role-Restricted"
 	exclude_modes = list(/datum/game_mode/nuclear)
+
+/datum/uplink_item/role_restricted/reverse_revolver
+	name = "Reverse Revolver"
+	desc = "A revolver that always fires at its user. \"Accidentally\" drop your weapon, then watch as the greedy corporate pigs blow their own brains all over the wall. \
+	The revolver itself is actually real. Only clumsy people, and clowns, can fire it normally. Honk."
+	cost = 14
+	item = /obj/item/weapon/gun/ballistic/revolver/reverse
+	restricted_roles = list("Clown")
 
 /datum/uplink_item/role_restricted/ez_clean_bundle
 	name = "EZ Clean Grenade Bundle"
