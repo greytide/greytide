@@ -23,7 +23,7 @@
 		if(target == user)
 			target <<"<span class='notice'>You can't implant yourself!</span>"
 			return 0
-		if(isloyal(target))
+		if(target.isloyal())
 			target <<"<span class='danger'>Your loyalty implant rejects [user]'s mindslave!</span>"
 			user <<"<span class='danger'>[target] somehow rejects the mindslave implant!</span>"
 			return 0

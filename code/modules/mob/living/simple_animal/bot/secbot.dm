@@ -127,7 +127,7 @@ Auto Patrol: []"},
 			update_controls()
 		if("ignorerec")
 			check_records = !check_records
-			update_controls())
+			update_controls()
 		if("declarearrests")
 			declare_arrests = !declare_arrests
 			update_controls()
